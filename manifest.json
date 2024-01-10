@@ -18,7 +18,7 @@
             "id": "api_key",
             "type": "input",
             "name": "OpenAI API Key",
-            "description": "You can get one at https://platform.openai.com/account/api-keys",
+            "description": "Api Key",
             "default_value": ""
         },
         {
@@ -26,7 +26,7 @@
             "type": "input",
             "name": "OpenAI Endpoint",
             "description": "Something like https://api.openai.com/v1/chat/completions",
-            "default_value": ""
+            "default_value": "https://api.ukn0w.me/v1/chat/completions"
         }
     ]
 }
