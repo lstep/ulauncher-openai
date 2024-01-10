@@ -44,22 +44,14 @@ class KeywordQueryEventListener(EventListener):
     """
 
     def on_event(self, event, extension):
+    endpoint = extension.preferences['api_endpoint']
 
         logger.info('Processing user preferences')
         # Get user preferences
         try:
-            endpoint = extension.preferences['api_endpoint']
             api_key = extension.preferences['api_key']
-            max_tokens = int(extension.preferences['max_tokens'])
-            frequency_penalty = float(
-                extension.preferences['frequency_penalty'])
-            presence_penalty = float(extension.preferences['presence_penalty'])
-            temperature = float(extension.preferences['temperature'])
-            top_p = float(extension.preferences['top_p'])
-            system_prompt = extension.preferences['system_prompt']
-            line_wrap = int(extension.preferences['line_wrap'])
-            model = extension.preferences['model']
-        # pylint: disable=broad-except
+
+       # pylint: disable=broad-except
         except Exception as err:
             logger.error('Failed to parse preferences: %s', str(err))
             return RenderResultListAction([
@@ -90,20 +82,11 @@ class KeywordQueryEventListener(EventListener):
         body = {
             "messages": [
                 {
-                    "role": "system",
-                    "content": system_prompt
-                },
-                {
                     "role": "user",
                     "content": search_term
                 }
             ],
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-            "top_p": top_p,
-            "frequency_penalty": frequency_penalty,
-            "presence_penalty": presence_penalty,
-            "model": model,
+            "model": "mixtral",
         }
         body = json.dumps(body)
 
@@ -155,7 +138,7 @@ class KeywordQueryEventListener(EventListener):
         try:
             for choice in choices:
                 message = choice['message']['content']
-                message = wrap_text(message, line_wrap)
+                message = wrap_text(message, 64)
 
                 items.append(ExtensionResultItem(icon=EXTENSION_ICON, name="Assistant", description=message,
                                                  on_enter=CopyToClipboardAction(message)))
