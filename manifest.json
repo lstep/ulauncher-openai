@@ -1,7 +1,7 @@
 {
     "required_api_version": "^2.0.0",
-    "name": "OpenAI chat",
-    "description": "Create a domain specific assistant using OpenAI API",
+    "name": "ChatGPT",
+    "description": "Create a domain specific assistant using GPT-3.5",
     "developer_name": "SeoFernando",
     "icon": "images/icon.png",
     "options": {
@@ -9,10 +9,10 @@
     },
     "preferences": [
         {
-            "id": "openai",
+            "id": "gpt_kw",
             "type": "keyword",
-            "name": "OPENAI",
-            "default_value": "openai"
+            "name": "GPT",
+            "default_value": "gpt"
         },
         {
             "id": "api_key",
