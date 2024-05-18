@@ -44,7 +44,7 @@ class KeywordQueryEventListener(EventListener):
     """
 
     def on_event(self, event, extension):
-    endpoint = extension.preferences['api_endpoint']
+        endpoint = extension.preferences['api_endpoint']
 
         logger.info('Processing user preferences')
         # Get user preferences
